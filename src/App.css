@@ -2,6 +2,9 @@
   margin: 0;
 }
 
-.app {
-  text-align: center;
+.app_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
