@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
 import "./App.css";
+import InfoBox from "./Components/InfoBox";
 
 function App() {
   //State = How to write a variable in React we use hooks instead of variables
@@ -16,8 +17,6 @@ function App() {
     const getCountriesData = async () => {
       const res = await fetch("https://disease.sh/v3/covid-19/countries");
       const contriesData = await res.json();
-      console.log(contriesData);
-
       const countries = contriesData.map((country) => ({
         name: country.country,
         value: country.countryInfo.iso2,
@@ -52,13 +51,11 @@ function App() {
           </Select>
         </FormControl>
       </div>
-
-      {/* Header */}
-      {/* Title +  Select input dropdown field*/}
-
-      {/* InfoBoxs*/}
-      {/* InfoBoxs*/}
-      {/* InfoBoxs*/}
+      <div className="app_stats">
+        <InfoBox title="Coronavirus Cases" cases={10} total={2000} />
+        <InfoBox title="Cases" cases={20} total={2000} />
+        <InfoBox title="Deaths" cases={30} total={2000} />
+      </div>
 
       {/* Table */}
       {/* Graph */}
