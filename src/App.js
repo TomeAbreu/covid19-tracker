@@ -12,7 +12,18 @@ function App() {
   //Hook useSteate for list of countries
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(["worldwide"]);
+  const [countryInfo, setCountryInfo] = useState({});
 
+  //Get Worldwide Info as soon as app loads so dependecy list is empty because we only want this to load when component loads and set CountryInfo variale
+  useEffect(() => {
+    const getWorldwideData = async () => {
+      const res = await fetch("https://disease.sh/v3/covid-19/all");
+      const worldWideData = await res.json();
+      setCountryInfo(worldWideData);
+    };
+
+    getWorldwideData();
+  }, []);
   //Hook UseEffect => Runs a piece of code based on a given condition that is a dependency list in the 2nd argument of the function
   //If the dependency list is empty: the code run just once after component loads and never more
   //If there is a variable in the list then the code runs when the component loads and when the variable value changes
@@ -32,9 +43,22 @@ function App() {
   }, []);
 
   //Select onChange async function
-  const onCountryChange = (event) => {
+  const onCountryChange = async (event) => {
     const countryCode = event.target.value;
     setCountry(countryCode);
+
+    //Get All Country Data of Country Selected
+    const url =
+      countryCode === "worldwide"
+        ? "https://disease.sh/v3/covid-19/all"
+        : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
+
+    //Make request to get that country data
+    const response = await fetch(url);
+    const countryData = await response.json();
+    console.log("CountryInfo");
+    console.log(countryData);
+    setCountryInfo(countryData);
   };
 
   return (
@@ -61,9 +85,21 @@ function App() {
           </FormControl>
         </div>
         <div className="app_stats">
-          <InfoBox title="Coronavirus Cases" cases={10} total={2000} />
-          <InfoBox title="Cases" cases={20} total={2000} />
-          <InfoBox title="Deaths" cases={30} total={2000} />
+          <InfoBox
+            title="Coronavirus Cases"
+            cases={countryInfo.todayCases}
+            total={countryInfo.cases}
+          />
+          <InfoBox
+            title="Recovered"
+            cases={countryInfo.todayRecovered}
+            total={countryInfo.recovered}
+          />
+          <InfoBox
+            title="Deaths"
+            cases={countryInfo.todayDeaths}
+            total={countryInfo.deaths}
+          />
         </div>
         {/* Map */}
         <Map />
