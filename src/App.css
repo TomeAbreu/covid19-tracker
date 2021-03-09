@@ -2,18 +2,40 @@
   margin: 0;
 }
 
+/* Grey Background Color */
 body {
   background-color: #f5f6fa;
 }
 
+.app {
+  /* Flex for putting elements in a row , justify content to space the elements betwenn window borders and elments envenly */
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
 .app_header {
+  /* Flex for putting elements in a row , justify content to space the elements betwenn each other in all the width of the parent div */
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
+/* Tell container app:left to take 90% of the row  */
+.app_left {
+  flex: 0.9;
+}
+
 .app_stats {
+  /* Flex for putting elements in a row , justify content to space the elements betwenn each other in all the width of the parent div*/
   display: flex;
   justify-content: space-between;
+}
+
+/* When width is below 990px put app components beneath each other intead of row  */
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
 }

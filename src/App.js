@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 import "./App.css";
 import InfoBox from "./Components/InfoBox";
+import Map from "./Components/Map";
 
 function App() {
   //State = How to write a variable in React we use hooks instead of variables
@@ -35,32 +39,44 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app_header">
-        <h1>Hello</h1>
-        <FormControl className="app_dropdown">
-          <Select variant="outlined" value={country} onChange={onCountryChange}>
-            <MenuItem key="Worldwide" value="worldwide">
-              Worldwide
-            </MenuItem>
-            {/* Loope through all the countries and show them in in options */}
-            {countries.map((country) => (
-              <MenuItem key={country.name} value={country.value}>
-                {country.name}
+      <div className="app_left">
+        <div className="app_header">
+          <h1>Hello</h1>
+          <FormControl className="app_dropdown">
+            <Select
+              variant="outlined"
+              value={country}
+              onChange={onCountryChange}
+            >
+              <MenuItem key="Worldwide" value="worldwide">
+                Worldwide
               </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+              {/* Loope through all the countries and show them in in options */}
+              {countries.map((country) => (
+                <MenuItem key={country.name} value={country.value}>
+                  {country.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <div className="app_stats">
+          <InfoBox title="Coronavirus Cases" cases={10} total={2000} />
+          <InfoBox title="Cases" cases={20} total={2000} />
+          <InfoBox title="Deaths" cases={30} total={2000} />
+        </div>
+        {/* Map */}
+        <Map />
       </div>
-      <div className="app_stats">
-        <InfoBox title="Coronavirus Cases" cases={10} total={2000} />
-        <InfoBox title="Cases" cases={20} total={2000} />
-        <InfoBox title="Deaths" cases={30} total={2000} />
-      </div>
+      <Card className="app_right">
+        <CardContent>
+          {/* Table */}
+          <h3>Live Cases by Country</h3>
 
-      {/* Table */}
-      {/* Graph */}
-
-      {/* Map */}
+          {/* Graph */}
+          <h3>WorldWide new Cases</h3>
+        </CardContent>
+      </Card>
     </div>
   );
 }
