@@ -4,10 +4,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import "./App.css";
 import InfoBox from "./Components/InfoBox";
-import Map from "./Components/Map";
+import Map from "./Components/Map/Map";
 import Table from "./Components/Table/Table";
 import { sortData } from "./utils/util";
 import LineGraph from "./Components/LineGraph";
+import "leaflet/dist/leaflet.css";
 
 function App() {
    //State = How to write a variable in React we use hooks instead of variables
@@ -16,6 +17,8 @@ function App() {
    const [country, setCountry] = useState(["worldwide"]);
    const [countryInfo, setCountryInfo] = useState({});
    const [tableData, setTableData] = useState([]);
+   const [mapCenter, setMapCenter] = useState([34.80746, -404796]);
+   const [mapZoom, setMapZoom] = useState(3);
 
    //Get Worldwide Info as soon as app loads so dependecy list is empty because we only want this to load when component loads and set CountryInfo variale
    useEffect(() => {
@@ -63,15 +66,20 @@ function App() {
       const response = await fetch(url);
       const countryData = await response.json();
       console.log("CountryInfo");
-      console.log(countryData);
+      console.log(countryData.countryInfo);
       setCountryInfo(countryData);
+
+      //Set Map centered to the country choosen and set zoom
+      setMapCenter([countryData.countryInfo.lat, countryData.countryInfo.long]);
+      console.log(mapCenter);
+      setMapZoom(4);
    };
 
    return (
       <div className="app">
          <div className="app_left">
             <div className="app_header">
-               <h1>Hello</h1>
+               <h1>Covid 19 - World Tracker</h1>
                <FormControl className="app_dropdown">
                   <Select
                      variant="outlined"
@@ -108,7 +116,7 @@ function App() {
                />
             </div>
             {/* Map */}
-            <Map />
+            <Map center={mapCenter} zoom={mapZoom} />
          </div>
          <Card className="app_right">
             <CardContent>
