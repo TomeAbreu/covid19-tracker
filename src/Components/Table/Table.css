@@ -1,25 +1,25 @@
 /* Set table max height to be scrollable*/
 .table {
-  margin-top: 20px;
-  height: 400px;
-  overflow: scroll;
-  color: #6a5d5d;
+   margin-top: 20px;
+   height: 400px;
+   overflow: scroll;
+   color: #6a5d5d;
 }
 
 /* Make table odd rows grey */
 .table tr:nth-of-type(odd) {
-  background-color: #f3f2f8;
+   background-color: #f3f2f8;
 }
 
 .table td {
-  padding: 0.5rem;
+   padding: 0.5rem;
 }
 /* Make rows dispay in the entire row inside parent container */
 .table tr {
-  display: flex;
-  justify-content: space-between;
+   display: flex;
+   justify-content: space-between;
 }
 
 .table tr:hover {
-  background-color: antiquewhite;
+   background-color: antiquewhite;
 }
