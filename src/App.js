@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import "./App.css";
 import InfoBox from "./Components/InfoBox";
 import Map from "./Components/Map";
+import Table from "./Components/Table/Table";
+import { sortData } from "./utils/util";
 
 function App() {
   //State = How to write a variable in React we use hooks instead of variables
@@ -13,6 +14,7 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(["worldwide"]);
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] = useState([]);
 
   //Get Worldwide Info as soon as app loads so dependecy list is empty because we only want this to load when component loads and set CountryInfo variale
   useEffect(() => {
@@ -37,6 +39,9 @@ function App() {
         value: country.countryInfo.iso2,
       }));
       setCountries(countries);
+      //Add table info of all countries
+      const sortedData = sortData(contriesData);
+      setTableData(sortedData);
     };
     //Call async function to loadd the countries
     getCountriesData();
@@ -108,6 +113,7 @@ function App() {
         <CardContent>
           {/* Table */}
           <h3>Live Cases by Country</h3>
+          <Table countries={tableData}></Table>
 
           {/* Graph */}
           <h3>WorldWide new Cases</h3>
