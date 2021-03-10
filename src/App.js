@@ -3,10 +3,10 @@ import { FormControl, MenuItem, Select } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import "./App.css";
-import InfoBox from "./Components/InfoBox";
+import InfoBox from "./Components/InfoBox/InfoBox";
 import Map from "./Components/Map/Map";
 import Table from "./Components/Table/Table";
-import { sortData } from "./utils/util";
+import { sortData, prettyPrintStat } from "./utils/util";
 import LineGraph from "./Components/LineGraph";
 import "leaflet/dist/leaflet.css";
 
@@ -14,7 +14,7 @@ function App() {
    //State = How to write a variable in React we use hooks instead of variables
    //Hook useSteate for list of countries
    const [countries, setCountries] = useState([]);
-   const [country, setCountry] = useState('worldwide');
+   const [country, setCountry] = useState("worldwide");
    const [countryInfo, setCountryInfo] = useState({});
    const [tableData, setTableData] = useState([]);
    const [mapCenter, setMapCenter] = useState([34.80746, -404796]);
@@ -104,18 +104,18 @@ function App() {
             <div className="app_stats">
                <InfoBox
                   title="Coronavirus Cases"
-                  cases={countryInfo.todayCases}
-                  total={countryInfo.cases}
+                  cases={prettyPrintStat(countryInfo.todayCases)}
+                  total={prettyPrintStat(countryInfo.cases)}
                />
                <InfoBox
                   title="Recovered"
-                  cases={countryInfo.todayRecovered}
-                  total={countryInfo.recovered}
+                  cases={prettyPrintStat(countryInfo.todayRecovered)}
+                  total={prettyPrintStat(countryInfo.recovered)}
                />
                <InfoBox
                   title="Deaths"
-                  cases={countryInfo.todayDeaths}
-                  total={countryInfo.deaths}
+                  cases={prettyPrintStat(countryInfo.todayDeaths)}
+                  total={prettyPrintStat(countryInfo.deaths)}
                />
             </div>
             {/* Map */}

@@ -22,14 +22,14 @@
    color: #555;
 }
 .info-flag {
-   height: 80px;
+   height: 90px;
    width: 100%;
    background-size: cover;
    border-radius: 8px;
 }
 
 .info-confirmed,
-.infor-recovered,
+.info-recovered,
 .info-deaths {
    font-size: 14px;
    margin-top: 5px;

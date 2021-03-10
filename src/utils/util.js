@@ -29,6 +29,10 @@ export const sortData = (data) => {
    return sortedData;
 };
 
+/* Util to stat pretty style with plus sign */
+export const prettyPrintStat = (stat) =>
+   stat ? `+${numeral(stat).format("0.0a")}` : "+0";
+
 //Draw circles on the map with interactive tooltip
 export const showDataOnMap = (data, casesType = "cases") =>
    data.map((country) => (
@@ -47,8 +51,10 @@ export const showDataOnMap = (data, casesType = "cases") =>
             <div className="info-container">
                <div
                   className="info-flag"
-                  style={{ backgroudImage: `url(${country.countryInfo.flag})` }}
-               ></div>
+                  style={{
+                     backgroundImage: `url(${country.countryInfo.flag})`,
+                  }}
+               />
                <div className="info-name">{country.country}</div>
                <div className="info-confirmed">
                   Cases: {numeral(country.cases).format("0,0")}
