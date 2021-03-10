@@ -14,11 +14,12 @@ function App() {
    //State = How to write a variable in React we use hooks instead of variables
    //Hook useSteate for list of countries
    const [countries, setCountries] = useState([]);
-   const [country, setCountry] = useState(["worldwide"]);
+   const [country, setCountry] = useState('worldwide');
    const [countryInfo, setCountryInfo] = useState({});
    const [tableData, setTableData] = useState([]);
    const [mapCenter, setMapCenter] = useState([34.80746, -404796]);
    const [mapZoom, setMapZoom] = useState(3);
+   const [mapCountries, setMapCountries] = useState([]);
 
    //Get Worldwide Info as soon as app loads so dependecy list is empty because we only want this to load when component loads and set CountryInfo variale
    useEffect(() => {
@@ -46,6 +47,8 @@ function App() {
          //Add table info of all countries
          const sortedData = sortData(contriesData);
          setTableData(sortedData);
+         //Set map variable
+         setMapCountries(contriesData);
       };
       //Call async function to loadd the countries
       getCountriesData();
@@ -116,7 +119,12 @@ function App() {
                />
             </div>
             {/* Map */}
-            <Map center={mapCenter} zoom={mapZoom} />
+            <Map
+               countries={mapCountries}
+               casesType="cases"
+               center={mapCenter}
+               zoom={mapZoom}
+            />
          </div>
          <Card className="app_right">
             <CardContent>
