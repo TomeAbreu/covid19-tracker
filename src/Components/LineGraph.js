@@ -46,7 +46,7 @@ const options = {
       ],
    },
 };
-function LineGraph({ casesType = "cases" }) {
+function LineGraph({ casesType, ...props }) {
    const [data, setData] = useState({});
 
    //https://disease.sh/v3/covid-19/historical/all/?lastdays=120
@@ -57,7 +57,7 @@ function LineGraph({ casesType = "cases" }) {
             "https://disease.sh/v3/covid-19/historical/all/?lastdays=120"
          );
          const resGraphData = await res.json();
-         let chartData = buildChartData(resGraphData, (casesType = "cases"));
+         let chartData = buildChartData(resGraphData, casesType);
          setData(chartData);
       };
       getGraphData();
@@ -82,16 +82,34 @@ function LineGraph({ casesType = "cases" }) {
       return chartData;
    };
 
+   function styleChar(casesType) {
+      if (casesType === "cases") {
+         return {
+            backgroundColor: "#DAA520",
+            borderColor: "#906b0f",
+         };
+      } else if (casesType === "recovered") {
+         return {
+            backgroundColor: "rgb(125, 215, 29)",
+            borderColor: "#8eb8ad",
+         };
+      }
+      return {
+         backgroundColor: "rgba(204, 16, 52, 0.5)",
+         borderColor: "#CC1034",
+      };
+   }
+
    return (
-      <div>
+      <div className={props.className}>
          {data?.length > 0 && (
             <Line
                options={options}
                data={{
                   datasets: [
                      {
-                        backgroundColor: "rgba(204, 16, 52, 0.5)",
-                        borderColor: "#CC1034",
+                        backgroundColor: styleChar(casesType).backgroundColor,
+                        borderColor: styleChar(casesType).borderColor,
                         data: data,
                      },
                   ],

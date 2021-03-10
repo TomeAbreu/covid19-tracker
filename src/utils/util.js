@@ -5,16 +5,22 @@ import { Circle, Popup } from "react-leaflet";
 /* Colors of th circles*/
 const casesTypeColors = {
    cases: {
-      hex: "#CC1034",
+      hex: "#DAA520",
+      rgb: "rgb(204, 16, 52)",
+      half_op: "rgba(204, 16, 52, 0.5)",
       multiplier: 200,
    },
    recovered: {
-      hex: "#7dd71d",
-      multiplier: 500,
+      hex: "green",
+      rgb: "rgb(125, 215, 29)",
+      half_op: "rgba(125, 215, 29, 0.5)",
+      multiplier: 200,
    },
    deaths: {
-      hex: "#fb4443",
-      multiplier: 400,
+      hex: "#CC1034",
+      rgb: "rgb(204, 16, 52)",
+      half_op: "rgba(204, 16, 52, 0.5)",
+      multiplier: 600,
    },
 };
 
@@ -31,17 +37,18 @@ export const sortData = (data) => {
 
 /* Util to stat pretty style with plus sign */
 export const prettyPrintStat = (stat) =>
-   stat ? `+${numeral(stat).format("0.0a")}` : "+0";
+   stat ? `+${numeral(stat).format("0,0")}` : "+0";
 
 //Draw circles on the map with interactive tooltip
-export const showDataOnMap = (data, casesType = "cases") =>
+export const showDataOnMap = (data, casesType) =>
    data.map((country) => (
       <Circle
-         key={country.country}
          center={[country.countryInfo.lat, country.countryInfo.long]}
          fillOpacity={0.4}
-         color={casesTypeColors[casesType].hex}
-         fillColor={casesTypeColors[casesType].hex}
+         pathOptions={{
+            color: casesTypeColors[casesType].hex,
+            fillColor: casesTypeColors[casesType].hex,
+         }}
          radius={
             Math.sqrt(country[casesType]) *
             casesTypeColors[casesType].multiplier

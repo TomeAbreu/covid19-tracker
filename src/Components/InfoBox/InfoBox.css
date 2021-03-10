@@ -1,21 +1,40 @@
-/* Tell to each infoBox take the room of the row as much as it can */
 .infoBox {
    flex: 1;
+   cursor: pointer;
 }
 
-/* Add margin right not to the last infobox */
-.infoBox:not(last-child) {
+.infoBox:not(:last-child) {
    margin-right: 15px;
 }
 
-.infoBox_cases {
-   color: #cc1034;
+.infoBox__cases {
+   color: goldenrod;
    font-weight: 600;
    font-size: 1.75rem;
    margin-bottom: 0.5rem;
 }
 
-.infoBox_total {
+.infoBox--selected {
+   border-top: 10px solid green;
+}
+
+.infoBox--red {
+   border-color: goldenrod;
+}
+
+.infoBox__cases--green {
+   color: green;
+}
+
+.infoBox--grey {
+   border-color: darkred;
+}
+
+.infoBox__cases--grey {
+   color: darkred;
+}
+
+.infoBox__total {
    color: #6c757d;
    font-weight: 700 !important;
    font-size: 0.8rem !important;
