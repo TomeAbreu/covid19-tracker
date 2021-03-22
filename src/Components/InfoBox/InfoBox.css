@@ -40,3 +40,19 @@
    font-size: 0.8rem !important;
    margin-top: 15px !important;
 }
+
+
+@media (max-width: 400px) {
+   .infoBox {
+   
+      cursor: pointer;
+      align-content: center;
+   }
+   .infoBox__title, .infoBox__cases, .infoBox__total {
+      text-align: center;
+   }
+
+   .infoBox:not(:last-child) {
+      margin-right: 0px;
+   }
+}

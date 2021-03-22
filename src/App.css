@@ -90,3 +90,17 @@ body {
       flex-direction: column;
    }
 }
+
+
+@media (max-width: 400px) {
+   .app_stats {
+      /* Flex for putting elements in a row , justify content to space the elements betwenn each other in all the width of the parent div*/
+      flex-direction: column;
+      justify-content: space-between;
+   
+   }
+   .app_header {
+      flex-direction: column;
+      
+   }
+}
